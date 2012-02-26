@@ -1,0 +1,12 @@
+include nav
+h1 Mahnungen
+span.button#printall Alle drucken
+span.button#print Gewählte drucken
+for remind in reminds
+	h2.object(id=remind._object._id)= remind._object.title
+		img.action(src="/gfx/mail.png", style="margin-bottom:-4px; margin-left:5px;")
+	div #{remind._pupil.lastname}, #{remind._pupil.firstname} #{remind._pupil.class}
+	div Ausgeliehen am #{remind.lenddate.getFmt()}
+	div Fällig am #{remind.expiredate.getFmt()}
+	div #{remind.printed}. Mahnung
+.status

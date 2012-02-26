@@ -1,0 +1,21 @@
+h1 Gruppe bearbeiten
+form(action="javascript:;")
+	input(type="hidden", name="_id", value=init._id)
+	table
+		tr
+			td Name
+			td
+				input(type="text", name="name", value=init.name)
+		tr
+			td Max. auszuleihende Obj.
+			td
+				input(type="text", name="maxlend", value=init.maxlend)
+		tr
+			td Max. Ausleihdauer
+			td
+				input(type="text", name="duration", value=init.duration)
+	br
+	span.button#submit Speichern
+	span.button#reset Zurücksetzen
+	span.button#close Schließen
+.status

@@ -1,0 +1,45 @@
+%\documentclass[12pt,a4paper,DIV12]{scrartcl}	% KOMASCRIPT :>
+%\usepackage{fullpage}
+\documentclass[11pt, a4paper]{article}
+%\usepackage{mdwlist}
+%\usepackage{iwona}
+\usepackage{formular}
+\usepackage{ocr}
+\input{ean13.tex}
+\usepackage[ngerman]{babel}
+%\usepackage[cm]{fullpage}
+\usepackage[left=5mm,top=5mm,right=5mm,bottom=5mm,nohead,nofoot]{geometry}
+%\usepackage[bottom=1cm,nohead,nofoot]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{rotating}
+\usepackage[official]{eurosym}
+%\usepackage{struktex}
+%\usepackage{color}
+%\usepackage{graphicx}
+%\usepackage{textcomp}
+\usepackage{multicol}
+
+%\usepackage[compact]{titlesec}
+%\titlespacing{\section}{0pt}{*0}{*1}
+%\usepackage[compact]{titlesec}
+%\title{Mikrocontroller (\textmu C) am Beispiel der AVR-Familie}
+%\author{Lukas Kramer \\ \texttt{lu@0x83.eu}}
+\date{}
+\pagestyle{empty}
+\newFRMfield{namef}{30mm}
+\begin{document}
+\input{ean13}
+\begin{multicols*}{4}
+\center
+\large
+\input{body.tex}
+
+ 
+
+ 
+ 
+
+
+\end{multicols*}
+\end{document}

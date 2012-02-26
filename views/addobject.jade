@@ -1,0 +1,15 @@
+if !isbn
+	include nav
+
+script
+	editobject = false;
+	preisbn = "#{init.isbn}";
+
+h1 Objekt hinzufügen
+form(action="javascript:;")
+	include objectform
+	span.button#submit Hinzufügen
+	span.button#reset Zurücksetzen
+	if isbn
+		span.button#close Schließen
+.status

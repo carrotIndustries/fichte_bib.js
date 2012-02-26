@@ -1,0 +1,18 @@
+h1 Ausleihen: #{pupil.lastname}, #{pupil.firstname} #{pupil.class}
+h2 Datum: #{now}
+	if altreturndate
+		span(style="color:red;") ;Alternatives Rückgabedatum gesetzt!
+script
+	now = "#{now}";
+	pupil = "#{pupil._id}";
+	quick = "#{quick}";
+form(action="javascript:;")
+	for object in objects
+		h3= object.title
+		span Fällig bis
+		input(type="text", class="datepicker", name=object.id, size="10", maxlength="10", value=returndate)
+	br
+	br
+	span.button#lend Ausleihen
+	span.button#close Schließen
+.status

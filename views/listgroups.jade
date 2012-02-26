@@ -1,0 +1,22 @@
+include nav
+h1 Gruppen anzeigen
+
+table.list(style="width:0;")
+	thead
+		tr
+			for column in columns
+				td= column.name
+			td Aktionen
+	tbody#content
+	tfoot
+		form(action="javascript:;")
+			tr
+				td
+					input(name="name")
+				td
+					input(name="maxlend")
+				td
+					input(name="duration")
+				td
+					img#add.action(src="/gfx/plus.png")
+.status

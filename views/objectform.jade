@@ -1,0 +1,59 @@
+table
+	tr
+		td Medium
+		td
+			input(type="text", name="media", list="media", value=init.media||"Buch")
+			datalist#media
+				for media in medias
+					option(value=media)
+	tr
+		td 1. Autor (Nachname)
+		td
+			input(type="text", name="author_last_0", value=init.authors[0].lastname)
+	tr
+		td 1. Autor (Vorname)
+		td
+			input(type="text", name="author_first_0", value=init.authors[0].firstname)
+	tr
+		td 2. Autor (Nachname)
+		td
+			input(type="text", name="author_last_1", value=init.authors[1].lastname)
+	tr
+		td 2. Autor (Vorname)
+		td
+			input(type="text", name="author_first_1", value=init.authors[1].firstname)
+	tr
+		td Titel
+		td
+			input(type="text", name="title", value=init.title)
+	tr
+		td ISBN
+		td
+			input(type="text", name="isbn", maxlength="13", value=init.isbn)
+			span.button#fetch Vervollständigen
+			span.button#generate ISBN erzeugen
+			span#pleasewait(style="display:none;") Bitte warten...
+	tr
+		td Verlag
+		td
+			input(type="text", name="publisher", value=init.publisher)
+	tr
+		td Erscheinungsjahr
+		td
+			input(type="text", name="year", maxlength="4", , value=init.year||"2000")
+	tr
+		td Auflage
+		td
+			input(type="text", name="edition", value=init.edition||"1")
+	tr
+		td Genre
+		td
+			input(type="text", name="genre", value=init.genre)
+	tr
+		td Ort
+		td
+			input(type="text", name="location", list="location", value=init.location||"sch")
+			datalist#location
+				for location in locations
+					option(value=location)
+br

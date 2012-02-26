@@ -1,0 +1,41 @@
+.top
+	include nav
+	h1 Schüler anzeigen
+	#formcontainer
+		form(action="javascript:;")
+			select(name="field", size="1")
+				for field in fields
+					option(value=field.field, selected=(field.field==lastsearch.field))= field.name
+			select(name="mode", size="1")
+				option(value="any", selected=("any"==lastsearch.mode)) Enthält
+				option(value="begin", selected=("begin"==lastsearch.mode)) Beginnt mit
+				option(value="end", selected=("end"==lastsearch.mode)) Endet mit
+				option(value="exact", selected=("exact"==lastsearch.mode)) Ist genau
+			input(type="text", name="search")
+			select(name="limit", size="1")
+				for limit in limits
+					option(value=limit, selected=(limit==lastsearch.limit))= limit?limit:"Alle"
+			select(name="group", size="1")
+				option(value="", selected=(""==lastsearch.group)) Egal
+				for group in groups
+					option(value=group._id, selected=(group._id==lastsearch.group))= group.name
+			br
+			span Sortiere
+			select(name="sort_by", size="1")
+				for field in fields
+					option(value=field.field, selected=(field.field==lastsearch.sort_by))= field.name
+			select(name="sort_dir", size="1")
+				option(value="1", selected=(1==lastsearch.sort_dir)) Aufsteigend
+				option(value="-1", selected=(-1==lastsearch.sort_dir)) Absteigend
+			span.button#submit Suchen
+			span.button#reset Zurücksetzen
+.content		
+	table.list
+		thead
+			tr
+				for column in columns
+					td= column.name
+				td Aktionen
+		tbody#content
+
+.status

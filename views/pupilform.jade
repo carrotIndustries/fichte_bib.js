@@ -1,0 +1,25 @@
+table
+	tr
+		td Nachname
+		td
+			input(type="text", name="lastname", value=init.lastname)
+	tr
+		td Vorname
+		td
+			input(type="text", name="firstname", value=init.firstname)
+	tr
+		td Klasse
+		td
+			input(type="text", name="class", value=init.class)
+	tr
+		td Kartennummer
+		td
+			input(type="text", name="card", value=init.card)
+			span.button#generate Neue Kartennummer
+	tr
+		td Gruppe
+		td
+			select(name="_group", size="1")
+				for group in groups
+					option(value=group._id, selected=(group._id.toString()==init._group.toString()))= group.name
+br

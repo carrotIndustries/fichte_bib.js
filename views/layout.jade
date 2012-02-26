@@ -1,0 +1,11 @@
+!!!
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/jquery-ui.css')
+		block scripts
+			each script in scripts
+				script(type='text/javascript', src= "/javascripts/#{script}")
+	body
+		div.container!= body

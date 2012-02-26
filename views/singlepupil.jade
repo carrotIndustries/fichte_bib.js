@@ -1,0 +1,25 @@
+h1 #{pupil.lastname}, #{pupil.firstname} #{pupil.class}
+span.button#close Schließen
+br
+table.list(style="margin-top:12px;")
+	thead
+		tr
+			td 1. Autor (Nachname)
+			td 1. Autor (Vorname)
+			td Titel
+			td Ausleihdatum
+			td Rückgabedatum
+			td Fälligkeitsdatum
+			td Aktionen
+	tbody
+		for lend in lends
+			tr(id=lend._object._id)
+				td= lend._object.authors[0].lastname
+				td= lend._object.authors[0].firstname
+				td= lend._object.title
+				td= lend.lenddate.getFmt()
+				td= lend.returndate?lend.returndate.getFmt():""
+				td= lend.expiredate.getFmt()
+				td
+					if !lend.returndate
+						img.action(src="/gfx/return.png")

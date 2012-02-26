@@ -1,0 +1,23 @@
+h1= object.title
+h2 von #{object.authors[0].lastname} #{object.authors[0].firstname}
+br
+span.button#close Schließen
+br
+table.list(style="margin-top:12px;")
+	thead
+		tr
+			td Nachname
+			td Vorname
+			td Klasse
+			td Ausleihdatum
+			td Rückgabedatum
+			td Fälligkeitsdatum
+	tbody
+		for lend in lends
+			tr
+				td= lend._pupil.lastname
+				td= lend._pupil.firstname
+				td= lend._pupil.class
+				td= lend.lenddate.getFmt()
+				td= lend.returndate?lend.returndate.getFmt():""
+				td= lend.expiredate.getFmt()

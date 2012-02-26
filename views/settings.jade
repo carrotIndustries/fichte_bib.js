@@ -1,0 +1,78 @@
+include nav
+script
+	meta =!{JSON.stringify(meta)};
+h1 Einstellungen
+span.button#submit Speichern
+span.button#reset Zurücksetzen
+form(action="javascript:;")
+	
+		h2 Rückgabedatum
+		div
+			|Modus
+			select(name="returnmode")
+				option(value="off", selected=("off"==meta.returndate.mode)) Deaktiviert
+				option(value="latest", selected=("latest"==meta.returndate.mode)) Spätestens
+				option(value="fixed", selected=("fixed"==meta.returndate.mode)) Fest
+		div(style="margin-top:5px;")
+			|Datum
+			input.datepicker(type="text", name="returndate", size="10", maxlength="10", value=meta.returndate.date.getFmt())
+		
+		h2 Standargruppe
+		select(name="defaultgroup")
+			for group in groups
+				option(value=group._id, selected=(group._id==meta.defaultgroup))= group.name
+		
+		h2 Sichtbare Spalten
+		select(name="visiblecols", size=objectcolumns.length, multiple=true)
+			for col in objectcolumns
+				option(value=col.field, selected=(meta.visibleobjectcolumns.indexOf(col.field) != -1))= col.name
+		
+		h2 Optionen für lpr
+		input(type="text", name="lpropts", value=meta.lpropts)
+		|Siehe lpr(1) für gültige Optionen
+		
+		h2 Mahnungen (verwende LaTeX-Markup zur Formatierung)
+		div(style="float:right")
+			h3 Platzhalter
+			table
+				tr
+					td %pfn
+					td Vorname des Schülers
+				tr
+					td %pln
+					td Nachname des Schülers
+				tr
+					td %class
+					td Klasse des Schülers
+				tr
+					td %afn
+					td Vorname des 1. Autors
+				tr
+					td %aln
+					td Nachname des 1. Autors
+				tr
+					td %title
+					td Buchtitel
+				tr
+					td %ldate
+					td Ausleihdatum
+				tr
+					td %edate
+					td Fälligkeitsdatum
+				tr
+					td %n
+					td Nummer der Mahnung
+				tr
+					td %fine
+					td Gesamnte Mahngebür
+				tr
+					td %efine
+					td Mahngebür/Mahnung
+				
+		textarea(name="remindtext", rows=25, cols=130)= meta.reminds.text
+		br
+		|Mahngebühr/Mahnung: €
+		input(type="text", name="fine", size="5", maxlength=5, value=meta.reminds.fine)
+		|Verwende . (Punkt) als Dezimaltrenner 
+			
+.status
