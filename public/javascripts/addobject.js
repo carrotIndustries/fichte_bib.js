@@ -95,6 +95,9 @@ function doadd(url, t) {
 
 $(document).ready(function(){
 	$("form").submit(function() {
+		if($("input[name=isbn]").val().length == 10) {
+			$("input[name=isbn]").val("978"+$("input[name=isbn]").val());
+		}
 		var t= {authors:[]};
 		var a = $(this).serializeArray();
 		var authors = 0;
