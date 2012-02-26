@@ -8,7 +8,6 @@ var express = require('express')
   , routes = require('./routes.js')
   , printroutes = require('./printroutes.js');
 request = require('request');
-XMLparser = require('xml2json');
 var app = module.exports = express.createServer();
 mongoose = require('mongoose');
 Schema = mongoose.Schema;
