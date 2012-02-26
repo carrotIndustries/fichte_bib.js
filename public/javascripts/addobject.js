@@ -127,14 +127,19 @@ $(document).ready(function(){
 			var url = "/do/add/object";
 		}
 		exist($("input[name=isbn]").val(), function(docs) {
-			if(docs.length == 0 || (editobject==true)) {
-				doadd(url, t);
-			}
-			else {
-				var c = window.confirm("Es gibt diese ISBN bereits, soll das Objekt dennoch hinzugefügt werden?")
-				if(c) {
+			if(docs) {
+				if(docs.length == 0 || (editobject==true)) {
 					doadd(url, t);
 				}
+				else {
+					var c = window.confirm("Es gibt diese ISBN bereits, soll das Objekt dennoch hinzugefügt werden?")
+					if(c) {
+						doadd(url, t);
+					}
+				}
+			}
+			else {
+				doadd(url, t);
 			}
 		});
 		
