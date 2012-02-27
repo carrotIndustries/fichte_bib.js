@@ -1,10 +1,12 @@
-include nav
+
 script
 	meta =!{JSON.stringify(meta)};
-h1 Einstellungen
-span.button#submit Speichern
-span.button#reset Zurücksetzen
-form(action="javascript:;")
+.top
+	include nav
+	h1 Einstellungen
+	span.button#submit Speichern
+	span.button#reset Zurücksetzen
+form(action="javascript:;", style="margin-top:7.5em;")
 	
 		h2 Rückgabedatum
 		div

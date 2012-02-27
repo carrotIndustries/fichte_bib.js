@@ -50,7 +50,7 @@ input, select, textarea {
 }
 
 input:focus {
-	border: 1px solid blue;
+	border: 1px solid #00B7FF;
 	-moz-box-shadow: 0 0 2px rgba(0, 0, 255, 1); 
 }
 
@@ -165,7 +165,7 @@ input:focus {
 
 
 .popup {
-	border: 2px solid blue;
+	border: 2px solid #00B7FF;
 	background-color: white;
 	-moz-border-radius: 10px;
 	position: fixed;
@@ -196,8 +196,9 @@ h1 {
 	margin-bottom: 5px;
 }
 .nav {
-	height: 30px;
+	/*height: 30px;*/
 	background-color: #dddddd;
+	padding-bottom: 5px;
 	-moz-border-radius-bottomright: 10px;
 	-moz-border-radius-bottomleft: 10px;
 	/*width: 50%;*/
@@ -206,6 +207,7 @@ h1 {
 	top:0px;
 	position: absolute;
 	-moz-box-shadow: 0 0 20px rgba(200, 200, 200, 1);
+	position: fixed;
 }
 /*
 .nav:hover {
@@ -217,15 +219,17 @@ h1 {
 }
 
 .content{
-	padding-top:150px;
+	padding-top:160px;
 }
 
 .top {
 	position: fixed;
 	background-color: #eeeeee;
 	width: 100%;
-	height:150px;
+	/*height:150px;*/
 	padding-left:10px;
+	padding-bottom: 10px;
 	left:0px;
+	top:0px;
 	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
