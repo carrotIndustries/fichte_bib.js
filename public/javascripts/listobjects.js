@@ -72,6 +72,9 @@ function editObject() {
 
 function viewObject() {
 	var id = $(this).parent().parent().attr("id");
+	if(!id) {
+		id = $(this).attr("id");
+	}
 	popup({
 		width: 800,
 		height: 600,
@@ -265,6 +268,9 @@ function list() {
 					}));
 					tr.dblclick(lendObject);
 					
+				}
+				else {
+					tr.dblclick(viewObject);
 				}
 				tr.append(td);
 				c.append(tr);
