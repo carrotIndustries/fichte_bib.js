@@ -8,6 +8,7 @@ script
 	include nav
 
 	h1 Objekte anzeigen
+	img.hourglass(src="/gfx/hourglass.png")
 	#formcontainer
 		form(action="javascript:;")
 			select(name="field", size="1")
@@ -44,8 +45,12 @@ script
 			select(name="sort_dir", size="1")
 				option(value="1", selected=(1==lastsearch.sort_dir)) Aufsteigend
 				option(value="-1", selected=(-1==lastsearch.sort_dir)) Absteigend
-			span.button#submit Suchen
-			span.button#reset Zurücksetzen
+			span.button#submit
+				img(src="/gfx/arrow.png")
+				|Suchen
+			span.button#reset
+				img(src="/gfx/backspace.png")
+				|Zurücksetzen
 			- if(lend)
 				span Ausleihen: #{lend.lastname} #{lend.firstname}; 
 				span#remain

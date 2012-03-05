@@ -1,26 +1,54 @@
-GroupColumns = [
-	{field: "name", name:"Name"},
-	{field: "maxlend", name:"Max. auszuleihende Obj."},
-	{field: "duration", name:"Max. Ausleihdauer"},
+permissions= [
+	{id:"admin", name:"Administrator (darf alles)"},
+	{id:"list objects", name:"Objekte anzeigen"},
+	{id:"delete objects", name:"Objekte löschen"},
+	{id:"edit objects", name:"Objekte bearbeiten"},
+	{id:"view objects", name:"Objekt-Karteikarte anzeigen"},
+	{id:"return", name:"Zurückgeben"},
+	{id:"longer", name:"Verlängern"},
+	{id:"lend", name:"Ausleihen"},
+	{id:"info objects", name:"Ausleihinfo anzeigen"},
+	{id:"add objects", name:"Objekte hinzufügen"},
+	{id:"add pupils", name:"Schüler hinzufügen"},
+	{id:"list pupils", name:"Schüler anzeigen"},
+	{id:"delete pupils", name:"Schüler löschen"},
+	{id:"edit pupils", name:"Schüler bearbeiten"},
+	{id:"view pupils", name:"Schüler-Karteikarte anzeigen"},
+	{id:"view reminds", name:"Mahnungen anzeigen"},
+	{id:"print reminds", name:"Mahnungen ausdrucken"},
+	{id:"view settings", name:"Einstellungen anzeigen"},
+	{id:"save settings", name:"Einstellungen speichern"},
+	{id:"list groups", name:"Gruppen anzeigen"},
+	{id:"delete groups", name:"Gruppen löschen"},
+	{id:"edit groups", name:"Gruppen bearbeiten"},
+	{id:"add groups", name:"Gruppen hinzufügen"},
+	{id:"print barcodes", name:"Barcodes ausleihen"},
+	{id:"view index", name:"Übersicht anzeigen"},
+	{id:"use quick", name:"Quickmodus verwenden"},
+];
+
+UserColumns = [
+	{field: "login", name:"Login"},
+	{field: "permissions", name:"Berechtigungen"}
 ];
 
 
-function deleteGroup() {
+function deleteUser() {
 	var id = $(this).parent().parent().attr("id");
-	var c = window.confirm("Soll die Gruppe gelöscht werden?");
+	var c = window.confirm("Soll der Benutzer gelöscht werden?");
 	if(!c) {
 		return;
 	}
 	$.ajax({
 		type: "GET",
-		url: "/do/delete/group/"+id,
+		url: "/do/delete/user/"+id,
 		dataType: "json",
 		success: function (data) {
 			if(data.status != "ok") {
 				status(data.data, "error");
 			}
 			else {
-				status("Gruppe wurde gelöscht", null);
+				status("Benutzer wurde gelöscht", null);
 			}
 			list();
 		}
@@ -28,12 +56,12 @@ function deleteGroup() {
 	
 }
 
-function editGroup() {
+function editUser() {
 	var id = $(this).parent().parent().attr("id");
 	popup({
 		width: 550,
-		height: 300,
-		src:"/groups/edit/"+id
+		height: 700,
+		src:"/users/edit/"+id
 	});
 }
 
@@ -44,32 +72,36 @@ function list() {
 
 	//alert(c);
 	//alert(t.toSource());
-	$.post('/do/list/groups', null, function(data) {
+	$.post('/do/list/users', null, function(data) {
 			c.show("fast");
 			//alert(data[0]["authors"].toSource());
 			for(row in data) {
 				//c.append($("<tr />"));
 				var tr = $(document.createElement("tr"));
-				for( col in GroupColumns) {
+				for( col in UserColumns) {
 					var td = $(document.createElement("td"));
-					td.text(data[row][GroupColumns[col].field]);
+					if(UserColumns[col].field == "permissions") {
+						td.text(data[row][UserColumns[col].field].join(","));
+					}
+					else {
+						td.text(data[row][UserColumns[col].field]);
+						
+					}
 					tr.append(td);
 				}
 				var td = $(document.createElement("td"));
 				tr.attr("id", data[row]._id);
-				if(data[row].default) {
-					tr.css("font-weight", "bold");
-				}
+				
 				td.append(actionIcon({
 					img: "/gfx/trash.png",
 					title: "Löschen",
-					fn: deleteGroup
+					fn: deleteUser
 				}));
 				
 				td.append(actionIcon({
 					img: "/gfx/edit.png",
 					title: "Bearbeiten",
-					fn: editGroup
+					fn: editUser
 				}));
 				
 				tr.append(td);

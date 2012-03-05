@@ -9,3 +9,9 @@ div.nav
 	a(href="/settings") Einstellungen
 	a(href="/print") Barcodes ausdrucken
 	a(href="/") Übersicht
+	if !User
+		a(href="/login") Anmelden
+	else
+		a(href="/logout") Abmelden
+	if Auth.mayI("admin", User)
+		a(href="/users") Benutzer

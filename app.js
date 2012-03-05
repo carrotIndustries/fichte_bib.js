@@ -10,6 +10,11 @@ var express = require('express')
 request = require('request');
 var app = module.exports = express.createServer();
 mongoose = require('mongoose');
+mongooseAuth = require('mongoose-auth');
+everyauth = require('everyauth')
+  , Promise = everyauth.Promise;
+
+User = null;
 Schema = mongoose.Schema;
 ObjectId = Schema.ObjectId;
 
@@ -26,15 +31,19 @@ Groups = require('./lib/groups.js');
 Lend = require('./lib/lend.js');
 Print = require('./lib/print.js');
 EAN13 = require('./lib/ean13.js');
+Auth = require('./lib/auth.js');
 // Configuration
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.set('view options', { pretty: true });
+  app.set('view options', { pretty: true});
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(app.router);
+  app.use(express.cookieParser());
+  app.use(express.session({secret:"CIxg0baRpw6gQ11DhNe3+g=="}));
+  app.use(mongooseAuth.middleware());
+  //app.use(app.router); conflicts with mongooseAuth.middleware()
   app.use(express.static(__dirname + '/public'));
   
   
@@ -51,7 +60,7 @@ app.configure('production', function(){
 // Routes
 
 app.use(express.bodyParser());
-
+app.get('*', function(req,res,next) {res.local("User", req.user); next();});
 app.get('/', routes.index);
 app.get('/objects/new', routes.addobject);
 app.get('/objects/edit/:id', routes.editobject);
@@ -101,6 +110,14 @@ app.get("/print/pack", printroutes.pack);
 app.post("/print/reminds", printroutes.reminds);
 app.get("/print/pupils", printroutes.allpupils);
 app.get("/print", routes.print);
+
+
+app.get("/users", routes.listusers);
+app.post('/do/list/users', doroutes.listusers);
+app.get('/users/edit/:id', routes.edituser);
+app.post('/do/update/user', doroutes.updateeuser);
+app.get('/do/delete/user/:id', doroutes.deleteuser);
+mongooseAuth.helpExpress(app);
 
 app.listen(3000);
 console.log("connecting");

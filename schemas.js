@@ -68,3 +68,34 @@ exports.MetaSchema = new Schema ({
 	maxid		: Number,
 	objectsearchdefault: String
 });
+
+exports.UserSchema = new Schema({
+	permissions: [String]
+});
+
+exports.UserSchema.plugin(mongooseAuth, {
+	everymodule: {
+		everyauth: {
+			User: function () {
+				return Models.UserModel;
+			}
+		}
+	}, 
+	password: {
+		everyauth: {
+			getLoginPath: '/login'
+			, postLoginPath: '/login'
+			, loginView: 'login.jade'
+			, loginLocals: {title: "Login", scripts:["jquery.js", "login.js"]}
+			, loginSuccessRedirect: '/'
+			, getRegisterPath: "/register"
+			, postRegisterPath: "/register"
+			, registerLocals: {title: "Registrieren", scripts:["jquery.js", "login.js"]}
+			, registerView: 'register.jade'
+			, registerSuccessRedirect: '/'
+		}
+	}
+});	
+
+	
+	

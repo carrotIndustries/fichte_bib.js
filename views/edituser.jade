@@ -1,0 +1,24 @@
+h1 Benutzer bearbeiten
+form(action="javascript:;")
+	input(type="hidden", name="_id", value=init._id)
+	table
+		tr
+			td Login
+			td
+				input(type="text", name="login", value=init.login)
+		tr
+			td Berechtigungen
+			td
+				select(name="permissions", size=permissions.length, multiple=true)
+					for perm in permissions
+						option(value=perm.id, selected=(init.permissions.indexOf(perm.id) != -1))= perm.name
+	br
+	span.button#submit
+		img(src="/gfx/floppy.png")
+		|Speichern
+	span.button#reset
+		img(src="/gfx/backspace.png")
+		|Zurücksetzen
+	span.button#close
+		img(src="/gfx/stop.png")
+		|Schließen

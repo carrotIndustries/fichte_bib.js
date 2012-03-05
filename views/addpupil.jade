@@ -2,6 +2,10 @@ include nav
 h1 Schüler hinzufügen
 form(action="javascript:;")
 	include pupilform
-	span.button#submit Hinzufügen
-	span.button#reset Zurücksetzen
+	span.button#submit
+		img(src="/gfx/plus.png")
+		|Hinzufügen
+	span.button#reset
+		img(src="/gfx/backspace.png")
+		|Zurücksetzen
 .status

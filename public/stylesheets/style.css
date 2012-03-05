@@ -6,6 +6,7 @@ body {
   font-family: Cantarell;
   background: -moz-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background-attachment: fixed;
+ /* overflow: scroll;*/
 }
 
 html {
@@ -16,8 +17,8 @@ html {
 
 a {
   color: #00B7FF;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: .5em;
+  padding-right: .5em;
   text-decoration: none;
 }
 a:hover {
@@ -77,6 +78,11 @@ input:focus {
 	margin: 5px;
 }
 
+.button img {
+	margin-bottom:-6px;
+	width:24px;
+}
+
 .button:active {
 	background-image: -moz-linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
 }
@@ -96,7 +102,7 @@ input:focus {
 }
 
 .list {
-	margin-top: 5px;
+	margin-top: 10px;
 	width:100%;
 	border: 1px solid black;
 	border-spacing:0px;
@@ -109,6 +115,7 @@ input:focus {
 	}
 .list tbody tr:hover {
 	background: rgba(200, 200, 255, 0.9);
+	-moz-transition: background 0.5s;
 }
 .odd {
 	background: rgba(200, 200, 200, 0.5);
@@ -182,7 +189,7 @@ input:focus {
 
 
 #formcontainer {
-	line-height:200%;
+	line-height:220%;
 }
 
 h3{
@@ -236,4 +243,19 @@ h1 {
 	left:0px;
 	top:0px;
 	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.denied {
+	margin-top: 100px;
+	text-align: center;
+	font-size: 200%;
+	background-color: red;
+	padding: 20px;
+	border: 3px solid #600000;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 0 0 20px rgba(200, 0, 0, 1);
+}
+
+.hourglass {
+	float: right;
 }

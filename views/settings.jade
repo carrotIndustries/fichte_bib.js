@@ -4,8 +4,12 @@ script
 .top
 	include nav
 	h1 Einstellungen
-	span.button#submit Speichern
-	span.button#reset Zurücksetzen
+	span.button#submit
+		img(src="/gfx/floppy.png")
+		|Speichern
+	span.button#reset
+		img(src="/gfx/backspace.png")
+		|Zurücksetzen
 form(action="javascript:;", style="margin-top:7.5em;")
 	
 		h2 Rückgabedatum

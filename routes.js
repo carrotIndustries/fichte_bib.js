@@ -3,7 +3,13 @@
  * GET home page.
  */
 
+
+
 exports.index = function(req, res){
+	if(!Auth.mayI("view index", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	Models.LendModel.where("returndate", null).lt("expiredate", new Date().setHours(3)).count(function(err, expired) {
 		Models.LendModel.where("returndate", null).count(function(err, lends) {
 			Models.PupilModel.where("deleted", false).count(function(err, pupils) {
@@ -23,6 +29,10 @@ exports.index = function(req, res){
 };
 
 exports.addobject = function(req, res){
+	if(!Auth.mayI("add objects", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	Models.ObjectModel.where("deleted", false).distinct("media", function (err, media) {
 		Models.ObjectModel.where("deleted", false).distinct("location", function (err, locations) {
 			res.render('addobject',{
@@ -38,6 +48,10 @@ exports.addobject = function(req, res){
 };
 
 exports.listobjects = function(req, res){
+	if(!Auth.mayI("list objects", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	Meta.get(function(m) {
 		Models.LendModel.where("_pupil", req.params.id).where("returndate", null).count(function(z, n) {
 			Models.PupilModel.where("_id", req.params.id).populate("_group").run(function (err, lend) {
@@ -67,6 +81,10 @@ exports.listobjects = function(req, res){
 };
 
 exports.editobject = function(req, res){
+	if(!Auth.mayI("edit objects", req.user)) {
+		Auth.renderDenied(false, res);
+		return false;
+	}
 	Models.ObjectModel.where("_id", req.params.id).run(function (err,docs) {
 		console.log(docs);
 		if(!docs || docs.length == 0) {
@@ -88,6 +106,10 @@ exports.editobject = function(req, res){
 };
 
 exports.singleobject = function(req, res) {
+	if(!Auth.mayI("view objects", req.user)) {
+		Auth.renderDenied(false, res);
+		return false;
+	}
 	var id = req.params.id;
 	Models.LendModel.where("_object", req.params.id).sort("lenddate", "ascending").populate("_pupil").run(function (err,lends) {
 		console.log(err);
@@ -103,6 +125,10 @@ exports.singleobject = function(req, res) {
 }
 
 exports.addpupil = function(req, res){
+	if(!Auth.mayI("add pupils", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	Meta.get(function(m) {
 		Models.GroupModel.where().run(function (err, groups) {
 			EAN13.generateCode(4711, function(code) {
@@ -118,6 +144,10 @@ exports.addpupil = function(req, res){
 };
 
 exports.listpupils = function(req, res){
+	if(!Auth.mayI("list pupils", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	Meta.get(function(m) {
 		Models.GroupModel.where().run(function (err, groups) {
 			res.render(
@@ -137,6 +167,10 @@ exports.listpupils = function(req, res){
 };
 
 exports.editpupil = function(req, res){
+	if(!Auth.mayI("edit pupils", req.user)) {
+		Auth.renderDenied(false, res);
+		return false;
+	}
 	Models.GroupModel.where().run(function (err, groups) {
 		Models.PupilModel.where("_id", req.params.id).run(function (err,docs) {
 			console.log(docs);
@@ -157,6 +191,10 @@ exports.editpupil = function(req, res){
 };
 
 exports.singlepupil = function(req, res) {
+	if(!Auth.mayI("view pupils", req.user)) {
+		Auth.renderDenied(false, res);
+		return false;
+	}
 	var id = req.params.id;
 	Models.LendModel.where("_pupil", req.params.id).sort("lenddate", "ascending").populate("_object").run(function (err,lends) {
 		console.log(err);
@@ -172,9 +210,12 @@ exports.singlepupil = function(req, res) {
 }
 
 exports.listgroups = function(req, res){
+	if(!Auth.mayI("list groups", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	res.render(
-		'listgroups',
-		{
+		'listgroups',{
 			title: 'Gruppen anzeigen',
 			scripts: ["jquery.js", "listgroups.js", "modal.js", "status.js"],
 			columns:Models.GroupColumns,
@@ -184,6 +225,10 @@ exports.listgroups = function(req, res){
 };
 
 exports.editgroup = function(req, res){
+	if(!Auth.mayI("edit groups", req.user)) {
+		Auth.renderDenied(false, res);
+		return false;
+	}
 	Models.GroupModel.where("_id", req.params.id).run(function (err,docs) {
 		console.log(docs);
 		if(!docs || docs.length == 0) {
@@ -210,6 +255,10 @@ Date.prototype.setFmt = function(s) {
 }
 
 exports.lend = function(req, res){
+	if(!Auth.mayI("lend", req.user)) {
+		Auth.renderDenied(false, res);
+		return false;
+	}
 	var now = new Date();
 	var t = [];
 	var objects = req.params.objects.split(",");
@@ -246,6 +295,10 @@ exports.lend = function(req, res){
 
 
 exports.reminds = function(req, res) {
+	if(!Auth.mayI("view reminds", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	Models.LendModel.where("returndate", null).lt("expiredate", new Date()).sort("lenddate", "ascending").populate("_pupil").populate("_object").run(function (err,reminds) {
 		res.render('reminds',{
 			title: 'Mahnungen',
@@ -257,6 +310,10 @@ exports.reminds = function(req, res) {
 
 
 exports.quick = function(req, res) {
+	if(!Auth.mayI("use quick", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	res.render('quick',{
 		title: 'Quickmodus',
 		scripts: ["jquery.js", "quick.js", "status.js", "modal.js"],
@@ -264,6 +321,10 @@ exports.quick = function(req, res) {
 }
 
 exports.settings = function(req, res) {
+	if(!Auth.mayI("view settings", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	Models.GroupModel.where().run(function(error, groups) {
 		Meta.get(function(m) {
 			delete m._doc._id;
@@ -279,6 +340,10 @@ exports.settings = function(req, res) {
 }
 
 exports.print = function(req, res){
+	if(!Auth.mayI("print barcodes", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
 	res.render(
 		'print',
 		{
@@ -287,4 +352,41 @@ exports.print = function(req, res){
 	});
 		
   //res.send("tbd");
+};
+
+
+exports.listusers = function(req, res){
+	if(!Auth.mayI("admin", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
+	res.render(
+		'listusers',{
+			title: 'Benutzer anzeigen',
+			scripts: ["jquery.js", "listusers.js", "modal.js", "status.js"]
+	});
+		
+  //res.send("tbd");
+};
+
+
+exports.edituser = function(req, res){
+	if(!Auth.mayI("admin", req.user)) {
+		Auth.renderDenied(false, res);
+		return false;
+	}
+	Models.UserModel.where("_id", req.params.id).run(function (err,docs) {
+		if(!docs || docs.length == 0) {
+			res.send("Not foundp");
+			return false;
+		}
+		
+		res.render('edituser',{
+			title: 'Benutzer bearbeiten',
+			scripts: ["jquery.js", "edituser.js", "status.js"],
+			init: docs[0],
+			permissions: Auth.permissions
+		});
+		
+	});
 };

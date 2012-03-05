@@ -57,16 +57,14 @@ function deletePupil() {
 	
 }
 
-function actionIcon(params) {
-	var img = $(document.createElement("img"));
-	img.addClass("action");
-	img.attr("src", params.img);
-	img.attr("title", params.title);
-	img.click(params.fn);
-	return img;
-}
+busy=false;
 
 function list() {
+		if(busy) {
+		return;
+	}
+	busy = true;
+	showThrobber();
 	var c = $("#content");
 	c.hide("fast").empty();
 	var t= {};
@@ -128,7 +126,8 @@ function list() {
 				tr.append(td);
 				c.append(tr);
 				$(".list>tbody>tr:odd").addClass("odd");
-				
+				busy=false;
+				hideThrobber();
 			}
 
 		}, "json");
@@ -136,7 +135,7 @@ function list() {
 
 
 $(document).ready(function(){
-	
+	$("form").change(list);
 	
 	$("form").submit(function() {
 		list();

@@ -10,7 +10,8 @@ function processXML(xml) {
 		titles.push($(this).text());
 		
 	});
-	$("input[name=title]").val(titles.join(" - "));
+	$("input[name=title]").val(titles.slice(0, 2).join(" - "));
+	$("input[name=title]").attr("size", $("input[name=title]").val().length);
 	$(xml).find("feed>entry>dc\\:date").each(function() {
 		$("input[name=year]").val($(this).text().slice(0,4));
 	});
@@ -65,8 +66,12 @@ function doadd(url, t) {
 			for(x in data.data.errors) {
 				$("input[name="+x+"]").addClass("error");
 			}
-	
-			window.top.status(data.data.message, "error");
+			if(data.data != "denied") {
+				window.top.status(data.data.message, "error");
+			}
+			else {
+				window.top.status("denied", "error");
+			}
 			
 				
 		}

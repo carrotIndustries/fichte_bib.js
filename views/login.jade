@@ -1,0 +1,19 @@
+include nav
+h1 Login
+- if ('undefined' !== typeof errors && errors.length)
+	ul#errors
+		- each error in errors
+			li.error= error
+
+form(action='/login', method='POST')
+	table
+		tr
+			td Login
+			td
+				input(type='text', name=everyauth.password.loginFormFieldName)
+		tr
+			td Passwort
+			td
+				input(type='password', name=everyauth.password.passwordFormFieldName)
+	br
+	span.button#login Login

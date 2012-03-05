@@ -56,3 +56,4 @@ exports.GroupColumns = [
 ];
 
 exports.LendModel = mongoose.model('lend', Schemas.LendSchema);
+exports.UserModel = mongoose.model('user', Schemas.UserSchema);

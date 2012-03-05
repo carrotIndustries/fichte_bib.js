@@ -16,7 +16,7 @@ ObjectColumns = [
 function updateremain(n) {
 	$("#remain").text(n+ " Objekt" + (n!=1?"e":"") + " verbleibend");
 }
-
+busy = false;
 basket = new Array();
 function lendObject() {
 	if(!remain) {
@@ -94,7 +94,7 @@ function deleteObject() {
 		dataType: "json",
 		success: function (data) {
 			if(data.status != "ok") {
-				alert(data.toSource());
+				status(data.data, "error");
 			}
 			else {
 				status("Objekt wurde gelöscht", null);
@@ -112,7 +112,12 @@ function infoObject() {
 		url: "/do/info/"+id,
 		dataType: "json",
 		success: function (data) {
-			status(data._pupil.lastname+ ","+ data._pupil.firstname+ " "+data._pupil.class+"<br>Fällig am "+data.expiredate, null);
+			if(data.data != "denied") {
+				status(data._pupil.lastname+ ","+ data._pupil.firstname+ " "+data._pupil.class+"<br>Fällig am "+data.expiredate, null);
+			}
+			else {
+				status(data.data, "error");
+			}
 		}
 	});
 	
@@ -131,7 +136,7 @@ function longerObject() {
 		dataType: "json",
 		success: function (data) {
 			if(data.status != "ok") {
-				alert(data.toSource());
+				status(data.data, "error");
 			}
 			else {
 				status("Objekt wurde um "+n+" Tag"+((n!=1)?"e":"")+" verlängert", null);
@@ -151,7 +156,7 @@ function returnObject() {
 		success: function (data) {
 			if(data.status != "ok") {
 				if(data.data != "exp") {
-					alert(data.toSource());
+					status(data.data, "error");
 				}
 				else {
 					status("Objekt war überfällig", "error");
@@ -166,16 +171,14 @@ function returnObject() {
 	
 }
 
-function actionIcon(params) {
-	var img = $(document.createElement("img"));
-	img.addClass("action");
-	img.attr("src", params.img);
-	img.attr("title", params.title);
-	img.click(params.fn);
-	return img;
-}
+
 
 function list() {
+	if(busy) {
+		return;
+	}
+	busy = true;
+	showThrobber();
 	var c = $("#content");
 	c.hide("fast").empty();
 	//var columns = ["authors", "title", "isbn", "publisher", "year", "edition", "genre"];
@@ -275,7 +278,8 @@ function list() {
 				tr.append(td);
 				c.append(tr);
 				$(".list>tbody>tr:odd").addClass("odd");
-				
+				busy=false;
+				hideThrobber();
 			}
 
 		}, "json");
@@ -285,12 +289,9 @@ function list() {
 $(document).ready(function(){
 	
 	
-	$("form").submit(function() {
-		list();
-		//$("div.status").text("asdf").fadeIn("fast").delay(1000).fadeOut("fast");
-		
-		//$("div.status").delay(1000).fadeOut();
-	});
+	$("form").submit(list);
+	$("form").change(list);
+	//$("form").keyup(list);
 
 	$("#submit").click(function() {
 		$("form").submit();
@@ -330,6 +331,7 @@ $(document).ready(function(){
 		updateremain(remain);
 	}
 	$("form>input[name=search]").focus();
+	hideThrobber();
 	list();
 	/*modal({
 		width: 300,
@@ -350,6 +352,7 @@ $(document).ready(function(){
 			}
 		]
 		});*/
+		
 });
 
 $(document).keydown(function(){

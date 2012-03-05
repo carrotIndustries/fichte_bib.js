@@ -27,7 +27,7 @@ $(document).ready(function() {
 		$.post("/do/updatemeta", t, function(data) {
 			//alert(data.toSource());
 			if(data.status == "error") {
-				window.top.status(data.data.message, "error");
+				window.top.status(data.data, "error");
 			}
 			else {
 				window.top.status("Einstellungen gespeichert");

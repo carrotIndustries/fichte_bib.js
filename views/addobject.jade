@@ -8,8 +8,12 @@ script
 h1 Objekt hinzufügen
 form(action="javascript:;")
 	include objectform
-	span.button#submit Hinzufügen
-	span.button#reset Zurücksetzen
+	span.button#submit
+		img(src="/gfx/plus.png")
+		|Hinzufügen
+	span.button#reset
+		img(src="/gfx/backspace.png")
+		|Zurücksetzen
 	if isbn
 		span.button#close Schließen
 .status

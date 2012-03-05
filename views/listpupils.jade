@@ -1,6 +1,7 @@
 .top
 	include nav
 	h1 Schüler anzeigen
+	img.hourglass(src="/gfx/hourglass.png")
 	#formcontainer
 		form(action="javascript:;")
 			select(name="field", size="1")
@@ -27,8 +28,12 @@
 			select(name="sort_dir", size="1")
 				option(value="1", selected=(1==lastsearch.sort_dir)) Aufsteigend
 				option(value="-1", selected=(-1==lastsearch.sort_dir)) Absteigend
-			span.button#submit Suchen
-			span.button#reset Zurücksetzen
+			span.button#submit
+				img(src="/gfx/arrow.png")
+				|Suchen
+			span.button#reset
+				img(src="/gfx/backspace.png")
+				|Zurücksetzen
 .content		
 	table.list
 		thead
