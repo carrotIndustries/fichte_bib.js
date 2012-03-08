@@ -36,25 +36,41 @@ function viewPupil() {
 
 function deletePupil() {
 	var id = $(this).parent().parent().attr("id");
-	var c = window.confirm("Soll der Schüler gelöscht werden?");
-	if(!c) {
-		return;
-	}
-	$.ajax({
-		type: "GET",
-		url: "/do/delete/pupil/"+id,
-		dataType: "json",
-		success: function (data) {
-			if(data.status != "ok") {
-				alert(data.toSource());
+	modal({
+		width: 300,
+		height: 150,
+		text:"Soll der Schüler gelöscht werden?",
+		buttons:[
+			{
+				text:"Abbrechen",
+			},
+			{
+				text:"Löschen",
+				css: [
+					["color", "red"]
+				],
+				id: "del"
 			}
-			else {
-				status("Schüler wurde gelöscht", null);
+		],
+		cb: function(z) {
+			if(z=="del") {
+				$.ajax({
+					type: "GET",
+					url: "/do/delete/pupil/"+id,
+					dataType: "json",
+					success: function (data) {
+						if(data.status != "ok") {
+							alert(data.toSource());
+						}
+						else {
+							status("Schüler wurde gelöscht", null);
+						}
+						list();
+					}
+				});
 			}
-			list();
 		}
 	});
-	
 }
 
 busy=false;

@@ -7,24 +7,42 @@ GroupColumns = [
 
 function deleteGroup() {
 	var id = $(this).parent().parent().attr("id");
-	var c = window.confirm("Soll die Gruppe gelöscht werden?");
-	if(!c) {
-		return;
-	}
-	$.ajax({
-		type: "GET",
-		url: "/do/delete/group/"+id,
-		dataType: "json",
-		success: function (data) {
-			if(data.status != "ok") {
-				status(data.data, "error");
+	modal({
+		width: 300,
+		height: 150,
+		text:"Soll die Gruppe gelöscht werden?",
+		buttons:[
+			{
+				text:"Abbrechen",
+			},
+			{
+				text:"Löschen",
+				css: [
+					["color", "red"]
+				],
+				id: "del"
 			}
-			else {
-				status("Gruppe wurde gelöscht", null);
+		],
+		cb: function(z) {
+			if(z=="del") {
+				$.ajax({
+					type: "GET",
+					url: "/do/delete/group/"+id,
+					dataType: "json",
+					success: function (data) {
+						if(data.status != "ok") {
+							status(data.data, "error");
+						}
+						else {
+							status("Gruppe wurde gelöscht", null);
+						}
+						list();
+					}
+				});
 			}
-			list();
 		}
 	});
+	
 	
 }
 
@@ -99,7 +117,7 @@ $(document).ready(function(){
 				for(x in data.data.errors) {
 					$("input[name="+x+"]").addClass("error");
 				}
-				status(data.data, "error");
+				status(data.data.message, "error");
 			}			
 			else {
 				//$("span.success").fadeIn(100).delay(1000).fadeOut();

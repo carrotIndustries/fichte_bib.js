@@ -35,22 +35,39 @@ UserColumns = [
 
 function deleteUser() {
 	var id = $(this).parent().parent().attr("id");
-	var c = window.confirm("Soll der Benutzer gelöscht werden?");
-	if(!c) {
-		return;
-	}
-	$.ajax({
-		type: "GET",
-		url: "/do/delete/user/"+id,
-		dataType: "json",
-		success: function (data) {
-			if(data.status != "ok") {
-				status(data.data, "error");
+	modal({
+		width: 300,
+		height: 150,
+		text:"Soll der Benutzer gelöscht werden?",
+		buttons:[
+			{
+				text:"Abbrechen",
+			},
+			{
+				text:"Löschen",
+				css: [
+					["color", "red"]
+				],
+				id: "del"
 			}
-			else {
-				status("Benutzer wurde gelöscht", null);
+		],
+		cb: function(z) {
+			if(z=="del") {
+				$.ajax({
+					type: "GET",
+					url: "/do/delete/user/"+id,
+					dataType: "json",
+					success: function (data) {
+						if(data.status != "ok") {
+							status(data.data, "error");
+						}
+						else {
+							status("Benutzer wurde gelöscht", null);
+						}
+						list();
+					}
+				});
 			}
-			list();
 		}
 	});
 	

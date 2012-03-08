@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "4f5784096d68f5b206000e6b" }, "hash" : "$2a$10$9VA6qDIxQ0h0KSEw0pDlUur4U/2AnahB5DKd0pM2lC8hO9HRl4INe", "login" : "niemand", "permissions" : [ "list objects", "list pupils", "view index" ], "salt" : "$2a$10$9VA6qDIxQ0h0KSEw0pDlUu" }

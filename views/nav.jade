@@ -1,17 +1,41 @@
 div.nav
-	a(href="/objects") Objekte
-	a(href="/objects/new") Objekt hinzufügen
-	a(href="/pupils") Schüler
-	a(href="/pupils/new") Schüler hinzufügen
-	a(href="/reminds") Mahnungen
-	a(href="/quick") Quickmodus
-	a(href="/groups") Gruppen
-	a(href="/settings") Einstellungen
-	a(href="/print") Barcodes ausdrucken
-	a(href="/") Übersicht
-	if !User
-		a(href="/login") Anmelden
+	a(href="/objects")
+		img(src="/gfx/book.png")
+		|Objekte
+	a(href="/objects/new")
+		img(src="/gfx/bookplus.png")
+		|Objekt hinzufügen
+	a(href="/pupils")
+		img(src="/gfx/user.png")
+		|Schüler
+	a(href="/pupils/new")
+		img(src="/gfx/userplus.png")
+		|Schüler hinzufügen
+	a(href="/reminds")
+		img(src="/gfx/warning.png")
+		|Mahnungen
+	a(href="/quick")
+		img(src="/gfx/quick.png")
+		|Quickmodus
+	a(href="/groups")
+		img(src="/gfx/group.png")
+		|Gruppen
+	a(href="/settings")
+		img(src="/gfx/floppy.png")
+		|Einstellungen
+	a(href="/print")
+		img(src="/gfx/printer.png")
+		|Barcodes ausdrucken
+	a(href="/")
+		img(src="/gfx/home.png")
+		|Übersicht
+	if !User || (User.login == "niemand")
+		a(href="/login")
+			img(src="/gfx/lock.png")
+			|Anmelden
 	else
-		a(href="/logout") Abmelden
+		a(href="/logout")
+			img(src="/gfx/lock.png")
+			|Abmelden
 	if Auth.mayI("admin", User)
 		a(href="/users") Benutzer

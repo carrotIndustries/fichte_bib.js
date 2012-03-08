@@ -1,7 +1,7 @@
 
 script
 	meta =!{JSON.stringify(meta)};
-.top
+.top(style="background-image:url(/gfx/floppy-large-alpha.png); background-size:80px;")
 	include nav
 	h1 Einstellungen
 	span.button#submit
@@ -38,7 +38,7 @@ form(action="javascript:;", style="margin-top:7.5em;")
 		|Siehe lpr(1) für gültige Optionen
 		
 		h2 Mahnungen (verwende LaTeX-Markup zur Formatierung)
-		div(style="float:right")
+		div(style="float:right; margin-right:50px;")
 			h3 Platzhalter
 			table
 				tr

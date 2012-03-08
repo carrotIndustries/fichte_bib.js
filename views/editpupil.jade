@@ -2,7 +2,13 @@ h1 Schüler bearbeiten
 form(action="javascript:;")
 	input(type="hidden", name="_id", value=init._id)
 	include pupilform
-	span.button#submit Speichern
-	span.button#reset Zurücksetzen
-	span.button#close Schließen
+	span.button#submit
+		img(src="/gfx/floppy.png")
+		|Speichern
+	span.button#reset
+		img(src="/gfx/backspace.png")
+		|Zurücksetzen
+	span.button#close
+		img(src="/gfx/stop.png")
+		|Schließen
 .status

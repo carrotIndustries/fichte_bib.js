@@ -8,4 +8,5 @@ Installation
 ```
 npm install -d
 mongoimport -d fichte_bib -c metas --jsonArray meta.json
+mongoimport -d fichte_bib -c users --jsonArray user.json
 ```

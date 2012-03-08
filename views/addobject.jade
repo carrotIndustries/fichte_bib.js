@@ -1,12 +1,14 @@
-if !isbn
-	include nav
+
 
 script
 	editobject = false;
 	preisbn = "#{init.isbn}";
-
-h1 Objekt hinzufügen
-form(action="javascript:;")
+#img(src="/gfx/book-bg.png", style="float:right;")
+.top(style="background-image:url(/gfx/bookplus-large-alpha.png);")
+	if !isbn
+		include nav
+	h1 Objekt hinzufügen
+form(action="javascript:;", style="margin-top:6.2em;")
 	include objectform
 	span.button#submit
 		img(src="/gfx/plus.png")

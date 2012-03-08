@@ -20,11 +20,26 @@ function printreminds(ids) {
 			status(data.data, "error");
 		}
 	});
-	var c=window.confirm((basket.length>1?"Sollen die":"Soll der")+" Mahnungszähler erhöht werden?");
-	if(c) {
-		advancecounter(ids);
-		location.reload();
-	}
+	modal({
+		width: 400,
+		height: 150,
+		text:(basket.length>1?"Sollen die":"Soll der")+" Mahnungszähler erhöht werden?",
+		buttons:[
+			{
+				text:"Abbrechen",
+			},
+			{
+				text:"Erhöhen",
+				id: "yes",
+			}
+		],
+		cb: function(z) {
+			if(z=="yes") {
+				advancecounter(ids);
+				location.reload();
+			}
+		}
+	});
 }
 
 function printall() {

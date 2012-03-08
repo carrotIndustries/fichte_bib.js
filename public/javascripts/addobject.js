@@ -140,10 +140,25 @@ $(document).ready(function(){
 					doadd(url, t);
 				}
 				else {
-					var c = window.confirm("Es gibt diese ISBN bereits, soll das Objekt dennoch hinzugefügt werden?")
-					if(c) {
-						doadd(url, t);
-					}
+					modal({
+						width: 300,
+						height: 150,
+						text:"Es gibt diese ISBN bereits, soll das Objekt dennoch hinzugefügt werden?",
+						buttons:[
+							{
+								text:"Abbrechen",
+							},
+							{
+								text:"Hinzufügen",
+								id: "add"
+							}
+						],
+						cb: function(z) {
+							if(z=="add") {
+								doadd(url, t);
+							}
+						}
+					});
 				}
 			}
 			else {

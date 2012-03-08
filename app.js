@@ -60,7 +60,17 @@ app.configure('production', function(){
 // Routes
 
 app.use(express.bodyParser());
-app.get('*', function(req,res,next) {res.local("User", req.user); next();});
+app.all('*', function(req,res,next) {
+	if(req.user) {
+		res.local("User", req.user); next();
+	}
+	else {
+		Models.UserModel.where("login", "niemand").run(function (error, docs) {
+			req.user = docs[0];
+			res.local("User", req.user); next();
+		});
+	}
+});
 app.get('/', routes.index);
 app.get('/objects/new', routes.addobject);
 app.get('/objects/edit/:id', routes.editobject);

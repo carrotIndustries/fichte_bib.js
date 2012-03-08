@@ -37,7 +37,7 @@ exports.addobject = function(req, res){
 		Models.ObjectModel.where("deleted", false).distinct("location", function (err, locations) {
 			res.render('addobject',{
 				title: 'Objekt hinzufügen',
-				scripts: ["jquery.js", "addobject.js", "status.js", "ean13.js"],
+				scripts: ["jquery.js", "addobject.js", "status.js", "ean13.js", "modal.js"],
 				locations: locations,
 				medias: media,
 				init: {authors:[{},{}], isbn:req.param("isbn")},
@@ -302,7 +302,7 @@ exports.reminds = function(req, res) {
 	Models.LendModel.where("returndate", null).lt("expiredate", new Date()).sort("lenddate", "ascending").populate("_pupil").populate("_object").run(function (err,reminds) {
 		res.render('reminds',{
 			title: 'Mahnungen',
-			scripts: ["jquery.js", "reminds.js", "status.js"],
+			scripts: ["jquery.js", "reminds.js", "status.js", "modal.js"],
 			reminds: reminds
 		});
 	});

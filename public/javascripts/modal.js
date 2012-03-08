@@ -5,7 +5,7 @@ function showWhiteout() {
 }
 	
 function hideWhiteout() {
-	$(".over").remove();
+	$(".over").fadeOut().remove();
 }
 
 function modal(params) {
@@ -26,7 +26,7 @@ function modal(params) {
 	m.append(buttons);
 	for(button in params.buttons) {
 		var b = $(document.createElement("span"));
-		b.attr("id", "modal_"+button);
+		b.attr("id", "modal_"+params.buttons[button].id);
 		b.addClass("button");
 		b.css("margin-right", 10);
 		b.css("margin-left", 10);
@@ -40,8 +40,8 @@ function modal(params) {
 		
 		b.click(function() {
 			killModal();
-			if(params.buttons[button].fn) {
-				params.buttons[button].fn();
+			if(params.cb) {
+				params.cb($(this).attr("id").replace("modal_", ""));
 			}
 		});
 		

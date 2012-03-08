@@ -1,8 +1,12 @@
-.top
+.top(style="background-image:url(/gfx/warning-large-alpha.png); background-size:80px;")
 	include nav
 	h1 Mahnungen
-	span.button#printall Alle drucken
-	span.button#print Gewählte drucken
+	span.button#printall
+		img(src="/gfx/printer.png")
+		|Alle drucken
+	span.button#print
+		img(src="/gfx/printer.png")
+		|Gewählte drucken
 div(style="margin-top: 7.5em;")
 	for remind in reminds
 		h2.object(id=remind._object._id)= remind._object.title

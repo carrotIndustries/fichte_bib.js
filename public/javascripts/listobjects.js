@@ -84,24 +84,43 @@ function viewObject() {
 
 function deleteObject() {
 	var id = $(this).parent().parent().attr("id");
-	var c = window.confirm("Soll das Objekt gelöscht werden?");
-	if(!c) {
-		return;
-	}
-	$.ajax({
-		type: "GET",
-		url: "/do/delete/object/"+id,
-		dataType: "json",
-		success: function (data) {
-			if(data.status != "ok") {
-				status(data.data, "error");
+	modal({
+		width: 300,
+		height: 150,
+		text:"Soll das Objekt gelöscht werden?",
+		buttons:[
+			{
+				text:"Abbrechen",
+			},
+			{
+				text:"Löschen",
+				css: [
+					["color", "red"]
+				],
+				id: "del"
 			}
-			else {
-				status("Objekt wurde gelöscht", null);
+		],
+		cb: function(z) {
+			if(z=="del") {
+				$.ajax({
+					type: "GET",
+					url: "/do/delete/object/"+id,
+					dataType: "json",
+					success: function (data) {
+						if(data.status != "ok") {
+							status(data.data, "error");
+						}
+						else {
+							status("Objekt wurde gelöscht", null);
+						}
+						list();
+					}
+				});
 			}
-			list();
 		}
 	});
+
+	
 	
 }
 
@@ -333,25 +352,7 @@ $(document).ready(function(){
 	$("form>input[name=search]").focus();
 	hideThrobber();
 	list();
-	/*modal({
-		width: 300,
-		height: 150,
-		text:"Soll das Objekt gelöscht werden?",
-		buttons:[
-			{
-				text:"Abbrechen"
-			},
-			{
-				text:"Löschen",
-				css: [
-					["color", "red"]
-				],
-				fn: function() {
-					alert("ack");
-				}
-			}
-		]
-		});*/
+
 		
 });
 

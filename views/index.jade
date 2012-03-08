@@ -1,6 +1,7 @@
-include nav
-h1= title
-
-h2 #{objects} Objekte, #{lends} ausgeliehen, #{expired} überfällig
-h2 #{pupils} Schüler
-h2 Angemeldet als #{User?User.login:"niemand"}
+.top(style="background-image:url(/gfx/home-large-alpha.png);")
+	include nav
+	h1= title
+div(style="margin-top:6.5em;")
+	h2 #{objects} Objekte, #{lends} ausgeliehen, #{expired} überfällig
+	h2 #{pupils} Schüler
+	h2 Angemeldet als #{User?User.login:"niemand"}

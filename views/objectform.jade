@@ -30,8 +30,12 @@ table
 		td ISBN
 		td
 			input(type="text", name="isbn", maxlength="13", value=init.isbn)
-			span.button#fetch Vervollständigen
-			span.button#generate ISBN erzeugen
+			span.button#fetch
+				img(src="/gfx/world.png")
+				|Vervollständigen
+			span.button#generate
+				img(src="/gfx/reload.png")
+				|ISBN erzeugen
 			span#pleasewait(style="display:none;") Bitte warten...
 	tr
 		td Verlag
