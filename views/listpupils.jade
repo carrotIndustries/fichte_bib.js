@@ -13,9 +13,9 @@
 				option(value="end", selected=("end"==lastsearch.mode)) Endet mit
 				option(value="exact", selected=("exact"==lastsearch.mode)) Ist genau
 			input(type="text", name="search")
-			select(name="limit", size="1")
-				for limit in limits
-					option(value=limit, selected=(limit==lastsearch.limit))= limit?limit:"Alle"
+			//select(name="limit", size="1")
+			//	for limit in limits
+			//		option(value=limit, selected=(limit==lastsearch.limit))= limit?limit:"Alle"
 			select(name="group", size="1")
 				option(value="", selected=(""==lastsearch.group)) Egal
 				for group in groups
@@ -42,5 +42,6 @@
 					td= column.name
 				td Aktionen
 		tbody#content
-
+	div(style="text-align:center;")
+		a#loadmore Mehr...
 .status

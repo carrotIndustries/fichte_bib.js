@@ -9,10 +9,15 @@ function actionIcon(params) {
 }
 
 function showThrobber() {
-	$(".hourglass").fadeIn();
+	$(".hourglass").fadeIn("fast");
 }
 
 
 function hideThrobber() {
-	$(".hourglass").fadeOut();
+	$(".hourglass").fadeOut("fast");
+}
+
+function loadmore() {
+	lastsearch.skip += parseInt(lastsearch.limit);
+	update(lastsearch);
 }

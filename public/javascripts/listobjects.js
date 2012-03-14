@@ -190,14 +190,113 @@ function returnObject() {
 	
 }
 
-
-
-function list() {
-	if(busy) {
+lastsearch = null;
+function update(t) {
+	if(busy==true) {
+		console.log("cancld");
 		return;
 	}
 	busy = true;
 	showThrobber();
+	var c = $("#content");
+	console.log("update");
+	$.post('/do/list/objects', t, function(data) {
+		
+		//alert(data[0]["authors"].toSource());
+		for(row in data) {
+			var tr = $(document.createElement("tr"));
+			for( col in ObjectColumns) {
+				var td = $(document.createElement("td"));
+				if(ObjectColumns[col].field.slice(0,6) != "author") {
+					td.text(data[row][ObjectColumns[col].field]);
+					
+				}
+				else {
+					if(data[row]["authors"][ObjectColumns[col].field.slice(8,9)]) {
+						td.text(data[row]["authors"][ObjectColumns[col].field.slice(8,9)][ObjectColumns[col].field.slice(11)]);
+					}
+				}
+				if($.inArray(ObjectColumns[col].field,meta.visibleobjectcolumns) != -1) {
+					tr.append(td);
+				}
+			}
+			tr.attr("id", data[row]._id);
+			//alert(data[row].lend.length);
+			if(data[row].status == 1) {
+				tr.css("color", "red");
+			}
+			if(data[row].status == 2) {
+				tr.css("color", "#ff00ff");
+			}
+			var td = $(document.createElement("td"));
+
+			td.addClass("actiontd");
+			td.append(actionIcon({
+				img: "/gfx/trash.png",
+				title: "Löschen",
+				fn: deleteObject
+			}));
+			
+			td.append(actionIcon({
+				img: "/gfx/edit.png",
+				title: "Bearbeiten",
+				fn: editObject
+			}));
+			
+			td.append(actionIcon({
+				img: "/gfx/page.png",
+				title: "Karteikarte",
+				fn: viewObject
+			}));
+			//td.append($(document.createElement("br")));
+			if(data[row].status > 0) {
+				td.append(actionIcon({
+					img: "/gfx/return.png",
+					title: "Zurückgeben",
+					fn: returnObject
+				}));
+				td.append(actionIcon({
+					img: "/gfx/longer.png",
+					title: "Verlängern",
+					fn: longerObject
+				}));
+				td.append(actionIcon({
+					img: "/gfx/info.png",
+					title: "Info",
+					fn: infoObject
+				}));
+			}
+			if(typeof(lend) == "string" && data[row].status==0) {
+				td.append(actionIcon({
+					img: "/gfx/lend.png",
+					title: "Ausleihen",
+					fn: lendObject
+				}));
+				tr.dblclick(lendObject);
+				
+			}
+			else {
+				tr.dblclick(viewObject);
+			}
+			tr.append(td);
+			c.append(tr);
+		}
+		
+		$(".list>tbody>tr:odd").addClass("odd");
+		busy=false;
+		console.log("done");
+		hideThrobber();
+		c.show("fast");
+		if(($(document).height() - $(window).height() == 0) && data.length>0) {
+			lastsearch.skip += parseInt(lastsearch.limit);
+			console.log(lastsearch.skip);
+			update(lastsearch);
+		}
+	}, "json");
+}
+
+function list() {
+	
 	var c = $("#content");
 	c.hide("fast").empty();
 	//var columns = ["authors", "title", "isbn", "publisher", "year", "edition", "genre"];
@@ -214,104 +313,31 @@ function list() {
 			}
 		}
 	}
+	t.skip = 0;
+	t.limit=50;
+	lastsearch = t;
 	//alert(c);
 	//alert(t.toSource());
-	$.post('/do/list/objects', t, function(data) {
-			c.show("fast");
-			//alert(data[0]["authors"].toSource());
-			for(row in data) {
-				var tr = $(document.createElement("tr"));
-				for( col in ObjectColumns) {
-					var td = $(document.createElement("td"));
-					if(ObjectColumns[col].field.slice(0,6) != "author") {
-						td.text(data[row][ObjectColumns[col].field]);
-						
-					}
-					else {
-						if(data[row]["authors"][ObjectColumns[col].field.slice(8,9)]) {
-							td.text(data[row]["authors"][ObjectColumns[col].field.slice(8,9)][ObjectColumns[col].field.slice(11)]);
-						}
-					}
-					if($.inArray(ObjectColumns[col].field,meta.visibleobjectcolumns) != -1) {
-						tr.append(td);
-					}
-				}
-				tr.attr("id", data[row]._id);
-				//alert(data[row].lend.length);
-				if(data[row].status == 1) {
-					tr.css("color", "red");
-				}
-				if(data[row].status == 2) {
-					tr.css("color", "#ff00ff");
-				}
-				var td = $(document.createElement("td"));
-
-				td.addClass("actiontd");
-				td.append(actionIcon({
-					img: "/gfx/trash.png",
-					title: "Löschen",
-					fn: deleteObject
-				}));
-				
-				td.append(actionIcon({
-					img: "/gfx/edit.png",
-					title: "Bearbeiten",
-					fn: editObject
-				}));
-				
-				td.append(actionIcon({
-					img: "/gfx/page.png",
-					title: "Karteikarte",
-					fn: viewObject
-				}));
-				//td.append($(document.createElement("br")));
-				if(data[row].status > 0) {
-					td.append(actionIcon({
-						img: "/gfx/return.png",
-						title: "Zurückgeben",
-						fn: returnObject
-					}));
-					td.append(actionIcon({
-						img: "/gfx/longer.png",
-						title: "Verlängern",
-						fn: longerObject
-					}));
-					td.append(actionIcon({
-						img: "/gfx/info.png",
-						title: "Info",
-						fn: infoObject
-					}));
-				}
-				if(typeof(lend) == "string" && data[row].status==0) {
-					td.append(actionIcon({
-						img: "/gfx/lend.png",
-						title: "Ausleihen",
-						fn: lendObject
-					}));
-					tr.dblclick(lendObject);
-					
-				}
-				else {
-					tr.dblclick(viewObject);
-				}
-				tr.append(td);
-				c.append(tr);
-				$(".list>tbody>tr:odd").addClass("odd");
-				busy=false;
-				hideThrobber();
-			}
-
-		}, "json");
+	console.log("list");
+	//while($(document).height() - $(window).height() == 0) {
+		update(t);
+	//}
 }
 
 
+
 $(document).ready(function(){
-	
-	
 	$("form").submit(list);
 	$("form").change(list);
 	//$("form").keyup(list);
-
+	
+	$(window).scroll(function(){
+		if ($(window).scrollTop() == $(document).height() - $(window).height()){
+			loadmore();
+		}
+	});
+	$("#loadmore").click(loadmore);
+	
 	$("#submit").click(function() {
 		$("form").submit();
 	});
@@ -353,7 +379,7 @@ $(document).ready(function(){
 	hideThrobber();
 	list();
 
-		
+	
 });
 
 $(document).keydown(function(){

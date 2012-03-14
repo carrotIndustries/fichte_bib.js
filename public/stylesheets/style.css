@@ -3,9 +3,11 @@ body {
   margin-right: 10px;
   margin-top:0px;
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
-  font-family: Cantarell;
+  font-family: Iwona, Cantarell, Sans, Helvetica;
   background: -moz-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
+  background: -webkit-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background-attachment: fixed;
+  font-size:12pt;
  /* overflow: scroll;*/
 }
 
@@ -20,11 +22,14 @@ a {
   padding-left: .5em;
   /*padding-right: .5em;*/
   text-decoration: none;
+  cursor: pointer;
 }
 a:hover {
 	/*text-decoration: underline;*/
 	text-shadow: 0 0 1px #00B7FF;
 }
+
+
 /*
 input:before {
 	padding-right: 5px;
@@ -44,15 +49,17 @@ input, select, textarea {
 	border: 1px solid black;
 	padding:3px;
 	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 	background-color: rgb(240, 240, 240);
 	margin-left: 5px;
 	margin-right: 5px;
 	
 }
 
-input:focus {
+input:focus,textarea:focus,select:focus {
 	border: 1px solid #00B7FF;
 	-moz-box-shadow: 0 0 2px rgba(0, 0, 255, 1); 
+	-webkit-box-shadow: 0 0 2px rgba(0, 0, 255, 1); 
 }
 
 .sorter {
@@ -73,7 +80,9 @@ input:focus {
 .button {
 	border: 1px solid black;
 	background-image: -moz-linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
 	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 	cursor: pointer;
 	padding:3px;
 	margin: 5px;
@@ -91,6 +100,7 @@ input:focus {
 
 .button:active {
 	background-image: -moz-linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
 }
 
 .button:hover {
@@ -122,6 +132,7 @@ input:focus {
 .list tbody tr:hover {
 	background: rgba(200, 200, 255, 0.9);
 	-moz-transition: background 0.5s;
+	-webkit-transition: background 0.5s;
 }
 .odd {
 	background: rgba(200, 200, 200, 0.5);
@@ -139,9 +150,11 @@ input:focus {
 
 .modal {
 	-moz-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
+	-webkit-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
 	border: 2px solid #00B7FF;
 	background-color: #dddddd;
 	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 	position: fixed;
 	left:0px;
 	top:0px;
@@ -164,6 +177,7 @@ input:focus {
 	position: absolute;
 	bottom: 0px;
 	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .status {
@@ -177,8 +191,10 @@ input:focus {
 	padding: 10px;
 	display:none;
 	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 	z-index: 200;
 	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 1); 
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 1); 
 }
 
 
@@ -186,11 +202,13 @@ input:focus {
 	border: 2px solid #00B7FF;
 	background-color: white;
 	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 	position: fixed;
 	left:0px;
 	top:0px;
 	z-index: 101;
 	 -moz-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
+	 -webkit-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
 }
 
 
@@ -218,7 +236,9 @@ h1 {
 	background-color: #dddddd;
 	padding-bottom: 5px;
 	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-right-radius: 10px;
 	-moz-border-radius-bottomleft: 10px;
+	-webkit-border-bottom-left-radius: 10px;
 	/*width: 50%;*/
 	overflow: hidden;
 	margin-top: 0em;
@@ -227,9 +247,10 @@ h1 {
 	top:0px;
 	position: absolute;
 	-moz-box-shadow: 0 0 10px rgba(100, 100, 100, 1);
+	-webkit-box-shadow: 0 0 10px rgba(100, 100, 100, 1);
 	position: fixed;
 	text-align:center;
-	font-size: 90%;
+	font-size: 80%;
 }
 /*
 .nav:hover {
@@ -256,6 +277,7 @@ h1 {
 	top:0px;
 	right: 0px;
 	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 	background-repeat:no-repeat; background-position: right bottom; background-size: 60px;
 }
 
@@ -267,7 +289,9 @@ h1 {
 	padding: 20px;
 	border: 3px solid #600000;
 	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
 	-moz-box-shadow: 0 0 20px rgba(200, 0, 0, 1);
+	-webkit-box-shadow: 0 0 20px rgba(200, 0, 0, 1);
 }
 
 .hourglass {

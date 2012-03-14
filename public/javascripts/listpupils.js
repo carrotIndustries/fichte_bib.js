@@ -73,14 +73,84 @@ function deletePupil() {
 	});
 }
 
-busy=false;
-
-function list() {
-		if(busy) {
+function update(t) {
+	if(busy==true) {
+		console.log("cancld");
 		return;
 	}
 	busy = true;
 	showThrobber();
+	var c = $("#content");
+	console.log("update");
+	$.post('/do/list/pupils', t, function(data) {
+		
+		//alert(data[0]["authors"].toSource());
+		for(row in data) {
+			
+			//c.append($("<tr />"));
+			var tr = $(document.createElement("tr"));
+			for( col in PupilColumns) {
+				var td = $(document.createElement("td"));
+				//alert(col);
+				if(PupilColumns[col].field == "_group.name") {
+					td.text(data[row]._group.name);
+				}
+				else {
+					td.text(data[row][PupilColumns[col].field]);
+				}
+				tr.append(td);
+			}
+			var td = $(document.createElement("td"));
+			tr.attr("id", data[row]._id);
+			
+			td.append(actionIcon({
+				img: "/gfx/trash.png",
+				title: "Löschen",
+				fn: deletePupil
+			}));
+			
+			td.append(actionIcon({
+				img: "/gfx/edit.png",
+				title: "Bearbeiten",
+				fn: editPupil
+			}));
+			
+			td.append(actionIcon({
+				img: "/gfx/page.png",
+				title: "Karteikarte",
+				fn: viewPupil
+			}));
+			
+			if(data[row].lends < data[row]._group.maxlend) {
+				td.append(actionIcon({
+					img: "/gfx/lend.png",
+					title: "Ausleihen",
+					fn: doLend
+				}));
+				tr.dblclick(doLend);
+			}
+			
+			tr.append(td);
+			c.append(tr);
+			
+		}
+		c.show("fast");
+		$(".list>tbody>tr:odd").addClass("odd");
+		busy=false;
+		if(($(document).height() - $(window).height() == 0) && data.length>0) {
+			lastsearch.skip += parseInt(lastsearch.limit);
+			console.log(lastsearch.skip);
+			update(lastsearch);
+		}
+		hideThrobber();
+
+	}, "json");
+}
+
+busy=false;
+lastsearch = null;
+
+function list() {
 	var c = $("#content");
 	c.hide("fast").empty();
 	var t= {};
@@ -89,64 +159,11 @@ function list() {
 	for(x in a) {
 		t[a[x].name] = a[x].value;
 	}
-	//alert(c);
-	//alert(t.toSource());
-	$.post('/do/list/pupils', t, function(data) {
-			c.show("fast");
-			//alert(data[0]["authors"].toSource());
-			for(row in data) {
-				
-				//c.append($("<tr />"));
-				var tr = $(document.createElement("tr"));
-				for( col in PupilColumns) {
-					var td = $(document.createElement("td"));
-					//alert(col);
-					if(PupilColumns[col].field == "_group.name") {
-						td.text(data[row]._group.name);
-					}
-					else {
-						td.text(data[row][PupilColumns[col].field]);
-					}
-					tr.append(td);
-				}
-				var td = $(document.createElement("td"));
-				tr.attr("id", data[row]._id);
-				
-				td.append(actionIcon({
-					img: "/gfx/trash.png",
-					title: "Löschen",
-					fn: deletePupil
-				}));
-				
-				td.append(actionIcon({
-					img: "/gfx/edit.png",
-					title: "Bearbeiten",
-					fn: editPupil
-				}));
-				
-				td.append(actionIcon({
-					img: "/gfx/page.png",
-					title: "Karteikarte",
-					fn: viewPupil
-				}));
-				
-				if(data[row].lends < data[row]._group.maxlend) {
-					td.append(actionIcon({
-						img: "/gfx/lend.png",
-						title: "Ausleihen",
-						fn: doLend
-					}));
-					tr.dblclick(doLend);
-				}
-				
-				tr.append(td);
-				c.append(tr);
-				$(".list>tbody>tr:odd").addClass("odd");
-				busy=false;
-				hideThrobber();
-			}
-
-		}, "json");
+	lastsearch=t;
+	t.skip = 0;
+	t.limit=50;
+	update(t);
+	
 }
 
 
@@ -159,7 +176,12 @@ $(document).ready(function(){
 		
 		//$("div.status").delay(1000).fadeOut();
 	});
-
+	$(window).scroll(function(){
+		if ($(window).scrollTop() == $(document).height() - $(window).height()){
+			loadmore();
+		}
+	});
+	$("#loadmore").click(loadmore);
 	$("#submit").click(function() {
 		$("form").submit();
 	});
