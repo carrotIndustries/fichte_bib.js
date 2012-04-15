@@ -17,6 +17,10 @@ function modal(params) {
 	m.css("left",parseInt(window.innerWidth)/2-params.width/2);
 	m.css("top",parseInt(window.innerHeight)/2-params.height/2);
 	var text = $(document.createElement("div"));
+	if(params.img) {
+		console.log( "url'(/gfx/"+params.img+".png')");
+		text.css("background-image", "url('/gfx/"+params.img+".png')");
+	}
 	text.addClass("modalText");
 	text.text(params.text);
 	m.append(text);
@@ -28,14 +32,11 @@ function modal(params) {
 		var b = $(document.createElement("span"));
 		b.attr("id", "modal_"+params.buttons[button].id);
 		b.addClass("button");
-		b.css("margin-right", 10);
-		b.css("margin-left", 10);
 		if(params.buttons[button].css) {
 			for(key in params.buttons[button].css) {
 				b.css(params.buttons[button].css[key][0], params.buttons[button].css[key][1]);
 			}
 		}
-		
 		b.text(params.buttons[button].text);
 		
 		b.click(function() {
@@ -53,6 +54,70 @@ function modal(params) {
 	$("body").append(m);
 	
 }
+
+function rateModal(params) {
+	showWhiteout();
+	var m = $(document.createElement("div"));
+	m.addClass("modal");
+	params.height=150;
+	params.width=300;
+	m.css("width", params.width);
+	m.css("height", params.height);
+	m.css("left",parseInt(window.innerWidth)/2-params.width/2);
+	m.css("top",parseInt(window.innerHeight)/2-params.height/2);
+	var text = $(document.createElement("div"));
+	text.css("background-image", "url('/gfx/star-large.png')");
+	text.addClass("modalText");
+	text.text(params.text);
+	m.append(text);
+	
+	var buttons = $(document.createElement("div"));
+	buttons.addClass("modalButtons");
+	m.append(buttons);
+	var b = $(document.createElement("span"));
+	b.attr("id", "modal_skip");
+	b.addClass("button");
+	b.text("Nicht bewerten");
+	b.css("font-size", "70%");
+		
+	b.click(function() {
+		killModal();
+		params.cb(-1);
+	});
+	
+	
+	var raters = $(document.createElement("span"));
+	raters.addClass("raters");
+	var i = 0;
+	while(i<5) {
+		var star = $(document.createElement("img"));
+		star.attr("src", "/gfx/star.png");
+		star.attr("id", "star_"+i);
+		star.click(function() {
+			killModal();
+			params.cb($(this).attr("id").replace("star_", ""));
+		});
+		star.hover(function() {
+			var id = $(this).attr("id").replace("star_", "");
+			$(".star").css("opacity", 0.5);
+			var j = 0;
+			while(j <= id) {
+				$("#star_"+j).css("opacity", 1);
+				j++;
+			}
+		});
+		star.addClass("star");
+		raters.append(star);
+		i++;
+	}
+	buttons.append(raters);
+		
+	buttons.append(b);
+	$("body").append(m);
+	
+}
+
+
 
 function killModal() {
 	$(".modal").remove();

@@ -61,7 +61,7 @@ exports.listobjects = function(req, res){
 							'listobjects',
 							{
 								title: 'Objekte anzeigen',
-								scripts: ["jquery.js", "listobjects.js", "modal.js", "status.js"],
+								scripts: ["jquery.js", "listobjects.js", "modal.js", "status.js", "rate.js"],
 								fields:Models.ObjectFields,
 								lastsearch: m._doc.object_lastsearch,
 								meta: m._doc,
@@ -280,7 +280,7 @@ exports.lend = function(req, res){
 				}
 				res.render('lend',{
 					title: 'Ausleihen',
-					scripts: ["jquery.js", "lend.js", "status.js", "jquery-ui.js"],
+					scripts: ["jquery.js", "lend.js", "status.js", "jquery-ui.js", "rate.js"],
 					pupil: pupil[0],
 					objects: docs,
 					now: now.getFmt(),
@@ -316,7 +316,7 @@ exports.quick = function(req, res) {
 	}
 	res.render('quick',{
 		title: 'Quickmodus',
-		scripts: ["jquery.js", "quick.js", "status.js", "modal.js"],
+		scripts: ["jquery.js", "quick.js", "status.js", "modal.js", "rate.js"],
 	});
 }
 

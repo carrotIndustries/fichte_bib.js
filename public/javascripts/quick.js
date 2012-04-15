@@ -88,15 +88,6 @@ function update() {
 	}
 }
 
-function exist(isbn, cb) {
-	$.ajax({
-		type: "GET",
-		url: "/do/findobject/"+isbn,
-		dataType: "json",
-		success: cb
-	});
-}
-
 function returnObject(id, s) {
 	$.ajax({
 		type: "GET",
@@ -115,7 +106,9 @@ function returnObject(id, s) {
 				else {
 					status("Objekt wurde zurückgegeben", null);
 				}
+				rateObject(id);
 			}
+			
 		}
 	});
 	

@@ -40,6 +40,7 @@ function deletePupil() {
 		width: 300,
 		height: 150,
 		text:"Soll der Schüler gelöscht werden?",
+		img:"trash-large",
 		buttons:[
 			{
 				text:"Abbrechen",

@@ -20,6 +20,7 @@ exports.ObjectColumns = [
 	{field: "authors[1].firstname", name:" 2. Autor (Vorname)"},
 	{field: "title", name:"Titel"},
 	{field: "isbn", name:"ISBN"},
+	{field: "rating", name:"Bewertung"},
 	{field: "publisher", name:"Verlag"},
 	{field: "year", name:"Erscheinungsjahr"},
 	{field: "edition", name:"Auflage"},

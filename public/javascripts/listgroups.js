@@ -11,6 +11,7 @@ function deleteGroup() {
 		width: 300,
 		height: 150,
 		text:"Soll die Gruppe gelöscht werden?",
+		img:"trash-large",
 		buttons:[
 			{
 				text:"Abbrechen",

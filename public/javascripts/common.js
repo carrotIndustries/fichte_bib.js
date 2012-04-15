@@ -1,3 +1,11 @@
+function exist(isbn, cb) {
+	$.ajax({
+		type: "GET",
+		url: "/do/findobject/"+isbn,
+		dataType: "json",
+		success: cb
+	});
+}
 
 function actionIcon(params) {
 	var img = $(document.createElement("img"));

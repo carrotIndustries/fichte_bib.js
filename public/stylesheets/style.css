@@ -3,11 +3,10 @@ body {
   margin-right: 10px;
   margin-top:0px;
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
-  font-family: Iwona, Cantarell, Sans, Helvetica;
+  font-family: Cantarell, Sans, Helvetica;
   background: -moz-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background: -webkit-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background-attachment: fixed;
-  font-size:12pt;
  /* overflow: scroll;*/
 }
 
@@ -162,10 +161,17 @@ input:focus,textarea:focus,select:focus {
 }
 
 .modalText {
-	text-align:center;
+	margin-top: 10px;
+	text-align:left;
 	font-weight: bold;
 	vertical-align: center;
 	padding: 1em;
+	padding-left:80px;
+	background-image:url("/gfx/warning-large.png");
+	background-size: 80px;
+	background-repeat: no-repeat;
+	background-position: top left;
+	height:100%;
 }
 
 .modalButtons {
@@ -279,6 +285,7 @@ h1 {
 	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 	background-repeat:no-repeat; background-position: right bottom; background-size: 60px;
+	z-index: 1;
 }
 
 .denied {
@@ -298,4 +305,20 @@ h1 {
 	float: right;
 	margin-right: 120px;
 	height:64px;
+}
+
+.raters{
+	margin-right: 20px;
+}
+
+.star {
+	opacity:0.5;
+	margin-bottom: -5px;
+	margin-left:1px;
+	margin-right:1px;
+	cursor:pointer;
+}
+
+#rating {
+	width: 8em;
 }

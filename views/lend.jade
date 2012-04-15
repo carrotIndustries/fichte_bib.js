@@ -9,6 +9,7 @@ script
 form(action="javascript:;")
 	for object in objects
 		h3= object.title
+			span.rating(id=object.id, rating=object._doc.rating.join(","))
 		span Fällig bis
 		input(type="text", class="datepicker", name=object.id, size="10", maxlength="10", value=returndate)
 	br

@@ -38,7 +38,10 @@ $(document).ready(function(){
 	});
 	$(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' , minDate: now});
 	
-	
+	$(".rating").each(function() {
+		//console.log(calcAvg($(this).attr("rating").split(",")));
+		renderRating(calcAvg($(this).attr("rating").split(",")), $(this));
+	});
 	
 	$("#lend").click(function() {
 		

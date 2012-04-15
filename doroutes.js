@@ -229,6 +229,14 @@ exports.deleteuser= function(req, res) {
 	Auth.remove(req.params.id, function(err) {sendresponse(err, res)});
 }
 
+exports.rate= function(req,res) {
+	if(!Auth.mayI("return", req.user)) {
+		sendresponse("denied", res);
+		return;
+	}
+	Objects.rate(req.params.id, req.params.rate, function(err) {sendresponse(err, res)});
+}
+
 exports.generateCode = function(req, res) {
 	EAN13.generateCode(req.params.prefix, function(data) {
 		res.send({code: data});

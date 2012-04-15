@@ -7,6 +7,7 @@ ObjectColumns = [
 	{field: "authors[1].firstname", name:" 2. Autor (Vorname)"},
 	{field: "title", name:"Titel"},
 	{field: "isbn", name:"ISBN"},
+	{field: "rating", name:"Bewertung"},
 	{field: "publisher", name:"Verlag"},
 	{field: "year", name:"Erscheinungsjahr"},
 	{field: "edition", name:"Auflage"},
@@ -88,6 +89,7 @@ function deleteObject() {
 		width: 300,
 		height: 150,
 		text:"Soll das Objekt gelöscht werden?",
+		img: "trash-large",
 		buttons:[
 			{
 				text:"Abbrechen",
@@ -179,11 +181,14 @@ function returnObject() {
 				}
 				else {
 					status("Objekt war überfällig", "error");
+					rateObject(id, function() {list()});
 				}
 			}
 			else {
 				status("Objekt wurde zurückgegeben", null);
+				rateObject(id, function() {list()});
 			}
+			
 			list();
 		}
 	});
@@ -208,7 +213,15 @@ function update(t) {
 			for( col in ObjectColumns) {
 				var td = $(document.createElement("td"));
 				if(ObjectColumns[col].field.slice(0,6) != "author") {
-					td.text(data[row][ObjectColumns[col].field]);
+					if(ObjectColumns[col].field != "rating") {
+						td.text(data[row][ObjectColumns[col].field]);
+					}
+					else {
+						var rating = calcAvg(data[row][ObjectColumns[col].field]);
+						renderRating(rating, td);
+						td.css("padding-bottom", "5px");
+						
+					}
 					
 				}
 				else {

@@ -24,6 +24,7 @@ function printreminds(ids) {
 		width: 400,
 		height: 150,
 		text:(basket.length>1?"Sollen die":"Soll der")+" Mahnungszähler erhöht werden?",
+		img:"plus-large",
 		buttons:[
 			{
 				text:"Abbrechen",

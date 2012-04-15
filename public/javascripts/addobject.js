@@ -34,14 +34,7 @@ function processXML(xml) {
 	$("#pleasewait").fadeOut("fast");
 }
 
-function exist(isbn, cb) {
-	$.ajax({
-		type: "GET",
-		url: "/do/findobject/"+isbn,
-		dataType: "json",
-		success: cb
-	});
-}
+
 
 function fetchISBN(isbn) {
 	$("#pleasewait").text("Bitte warten...");

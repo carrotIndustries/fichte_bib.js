@@ -39,6 +39,7 @@ function deleteUser() {
 		width: 300,
 		height: 150,
 		text:"Soll der Benutzer gelöscht werden?",
+		img:"trash-large",
 		buttons:[
 			{
 				text:"Abbrechen",

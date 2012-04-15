@@ -78,13 +78,15 @@ app.get('/objects', routes.listobjects);
 app.get('/objects/lend/:id', routes.listobjects);
 app.get('/objects/:id', routes.singleobject);
 
+
+
 app.get('/do/fetch/isbn/:isbn', doroutes.fetchisbn);
 
 app.post('/do/add/object', doroutes.addobject);
 app.post('/do/update/object', doroutes.updateobject);
 app.post('/do/list/objects', doroutes.listobjects);
 app.get('/do/delete/object/:id', doroutes.deleteobject);
-
+app.get("/do/rate/:id/:rate", doroutes.rate);
 app.get('/pupils', routes.listpupils);
 app.get('/pupils/new', routes.addpupil);
 app.get('/pupils/edit/:id', routes.editpupil);
