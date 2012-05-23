@@ -4,7 +4,9 @@ exports.LendSchema = new Schema({
 	returndate	: {type: Date},
 	_pupil 		: {type: Schema.ObjectId, ref: 'pupil', required:true},
 	_object		: {type: Schema.ObjectId, ref: 'object', required:true},
-	printed		: {type: Number, min:1, default:1}
+	printed		: {type: Number, min:1, default:1},
+	paid		: {type: Number, min:0, default:0}
+	
 });
 
 exports.ObjectSchema = new Schema({
@@ -20,6 +22,7 @@ exports.ObjectSchema = new Schema({
 	genre		: String,
 	location	: {type: String, trim:true, required:true},
 	media		: {type: String, trim:true, required:true},
+	rating		: [Number],
 	deleted		: Boolean,
 });
 
