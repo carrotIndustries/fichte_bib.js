@@ -4,7 +4,7 @@ body {
   margin-top:0px;
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
   font-family: Cantarell, Sans, Helvetica;
-  background: -moz-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
+  background: linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background: -webkit-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background-attachment: fixed;
  /* overflow: scroll;*/
@@ -47,7 +47,7 @@ input:before {
 input, select, textarea {
 	border: 1px solid black;
 	padding:3px;
-	-moz-border-radius: 5px;
+	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	background-color: rgb(240, 240, 240);
 	margin-left: 5px;
@@ -57,7 +57,7 @@ input, select, textarea {
 
 input:focus,textarea:focus,select:focus {
 	border: 1px solid #00B7FF;
-	-moz-box-shadow: 0 0 2px rgba(0, 0, 255, 1); 
+	box-shadow: 0 0 2px rgba(0, 0, 255, 1); 
 	-webkit-box-shadow: 0 0 2px rgba(0, 0, 255, 1); 
 }
 
@@ -78,9 +78,9 @@ input:focus,textarea:focus,select:focus {
 }
 .button {
 	border: 1px solid black;
-	background-image: -moz-linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
+	background-image: linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
 	background-image: -webkit-linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
-	-moz-border-radius: 5px;
+	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	cursor: pointer;
 	padding:3px;
@@ -98,7 +98,7 @@ input:focus,textarea:focus,select:focus {
 }
 
 .button:active {
-	background-image: -moz-linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
+	background-image: linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
 	background-image: -webkit-linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
 }
 
@@ -130,7 +130,7 @@ input:focus,textarea:focus,select:focus {
 	}
 .list tbody tr:hover {
 	background: rgba(200, 200, 255, 0.9);
-	-moz-transition: background 0.5s;
+	transition: background 0.5s;
 	-webkit-transition: background 0.5s;
 }
 .odd {
@@ -148,11 +148,11 @@ input:focus,textarea:focus,select:focus {
 }
 
 .modal {
-	-moz-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
+	box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
 	-webkit-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
 	border: 2px solid #00B7FF;
 	background-color: #dddddd;
-	-moz-border-radius: 10px;
+	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	position: fixed;
 	left:0px;
@@ -182,7 +182,7 @@ input:focus,textarea:focus,select:focus {
 	padding-top: 1em;
 	position: absolute;
 	bottom: 0px;
-	-moz-border-radius: 10px;
+	border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
 
@@ -196,10 +196,10 @@ input:focus,textarea:focus,select:focus {
 	border: 2px solid black;
 	padding: 10px;
 	display:none;
-	-moz-border-radius: 10px;
+	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	z-index: 200;
-	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 1); 
+	box-shadow: 0 0 5px rgba(0, 0, 0, 1); 
 	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 1); 
 }
 
@@ -207,13 +207,13 @@ input:focus,textarea:focus,select:focus {
 .popup {
 	border: 2px solid #00B7FF;
 	background-color: white;
-	-moz-border-radius: 10px;
+	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	position: fixed;
 	left:0px;
 	top:0px;
 	z-index: 101;
-	 -moz-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
+	 box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
 	 -webkit-box-shadow: 0 0 100px rgba(255, 255, 255, 1); 
 }
 
@@ -241,9 +241,9 @@ h1 {
 	/*height: 30px;*/
 	background-color: #dddddd;
 	padding-bottom: 5px;
-	-moz-border-radius-bottomright: 10px;
+	border-bottom-right-radius: 10px;
 	-webkit-border-bottom-right-radius: 10px;
-	-moz-border-radius-bottomleft: 10px;
+	border-bottom-left-radius: 10px;
 	-webkit-border-bottom-left-radius: 10px;
 	/*width: 50%;*/
 	overflow: hidden;
@@ -252,7 +252,7 @@ h1 {
 	right:20px;
 	top:0px;
 	position: absolute;
-	-moz-box-shadow: 0 0 10px rgba(100, 100, 100, 1);
+	box-shadow: 0 0 10px rgba(100, 100, 100, 1);
 	-webkit-box-shadow: 0 0 10px rgba(100, 100, 100, 1);
 	position: fixed;
 	text-align:center;
@@ -282,7 +282,7 @@ h1 {
 	left:0px;
 	top:0px;
 	right: 0px;
-	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 	background-repeat:no-repeat; background-position: right bottom; background-size: 60px;
 	z-index: 1;
@@ -295,9 +295,9 @@ h1 {
 	background-color: red;
 	padding: 20px;
 	border: 3px solid #600000;
-	-moz-border-radius: 20px;
+	border-radius: 20px;
 	-webkit-border-radius: 20px;
-	-moz-box-shadow: 0 0 20px rgba(200, 0, 0, 1);
+	box-shadow: 0 0 20px rgba(200, 0, 0, 1);
 	-webkit-box-shadow: 0 0 20px rgba(200, 0, 0, 1);
 }
 
