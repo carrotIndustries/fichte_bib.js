@@ -4,7 +4,7 @@ body {
   margin-top:0px;
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
   font-family: Cantarell, Sans, Helvetica;
-  background: linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
+  background: -moz-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background: -webkit-linear-gradient(bottom, #FDE2BE 10%, #ffffff 80%) no-repeat #FDE2BE;
   background-attachment: fixed;
  /* overflow: scroll;*/
@@ -78,7 +78,7 @@ input:focus,textarea:focus,select:focus {
 }
 .button {
 	border: 1px solid black;
-	background-image: linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
 	background-image: -webkit-linear-gradient(bottom, rgb(180,180,180) 10%, rgb(255,255,255) 80%);
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -130,7 +130,7 @@ input:focus,textarea:focus,select:focus {
 	}
 .list tbody tr:hover {
 	background: rgba(200, 200, 255, 0.9);
-	transition: background 0.5s;
+	-moz-transition: background 0.5s;
 	-webkit-transition: background 0.5s;
 }
 .odd {
