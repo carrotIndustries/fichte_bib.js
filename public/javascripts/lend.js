@@ -6,7 +6,7 @@ $(document).ready(function(){
 		for(x in a) {
 			var d = a[x].value.split(".");
 			if(d.length == 3) {
-				t.push({object: a[x].name, returndate: new Date(d[2], parseInt(d[1])-1, d[0], 10).getTime()});
+				t.push({object: a[x].name, returndate: new Date(d[2], Number(d[1])-1, d[0], 10).getTime()});
 			}
 			else {
 				status("Ungültiges Datum", "error");
@@ -14,7 +14,7 @@ $(document).ready(function(){
 		}
 		var d = now.split(".");
 		var o = {
-			now:  new Date(d[2], parseInt(d[1])-1, d[0], 10).getTime(),
+			now:  new Date(d[2], Number(d[1])-1, d[0], 10).getTime(),
 			pupil: pupil,
 			objects: t
 		};
