@@ -242,3 +242,11 @@ exports.generateCode = function(req, res) {
 		res.send({code: data});
 	});
 }
+
+exports.updateclasses = function(req, res) {
+	if(!Auth.mayI("admin", req.user)) {
+		sendresponse("denied", res);
+		return;
+	}
+	Pupils.updateclasses(req.body, function(err) {sendresponse(err, res)});
+}

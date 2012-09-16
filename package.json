@@ -1,15 +1,16 @@
 {
     "name": "fichte_bib.js"
-  , "version": "0.0.4"
+  , "version": "0.1.0"
   , "private": true
   , "dependencies": {
       "express": "2.5.5"
     , "jade": ">= 0.0.1"
     , "fs.extra": ">= 1.0.1"
     , "request" : ">= 2.9.100"
-    , "mongoose": ">= 2.5.5"
-    , "mongoose-auth":">=0.0.12"
-    , "everyauth":">=0.2.30"
+    , "mongoose": "2.7.4"
+    , "mongoose-auth":"0.0.12"
+    , "everyauth":"0.2.30"
     , "connect":">=1.8.5"
+    , "async":"0.1.22"
   }
 }

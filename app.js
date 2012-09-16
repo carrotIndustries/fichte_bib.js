@@ -23,6 +23,7 @@ Schemas = require('./schemas');
 Models = require('./models');
 
 util = require('util');
+async = require('async');
 
 Objects = require("./lib/objects.js")
 Pupils = require("./lib/pupils.js")
@@ -129,6 +130,9 @@ app.post('/do/list/users', doroutes.listusers);
 app.get('/users/edit/:id', routes.edituser);
 app.post('/do/update/user', doroutes.updateeuser);
 app.get('/do/delete/user/:id', doroutes.deleteuser);
+
+app.get("/updateclasses", routes.updateclasses);
+app.post("/do/updateclasses", doroutes.updateclasses);
 mongooseAuth.helpExpress(app);
 
 app.listen(3000);

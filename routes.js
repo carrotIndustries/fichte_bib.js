@@ -390,3 +390,18 @@ exports.edituser = function(req, res){
 		
 	});
 };
+
+exports.updateclasses = function(req, res) {
+	if(!Auth.mayI("admin", req.user)) {
+		Auth.renderDenied(true, res);
+		return false;
+	}
+	Models.PupilModel.where("deleted", false).asc("lastname").run(function (err, docs) {
+			res.render(
+				'updateclasses',{
+				title: 'Klassen aktualisieren',
+				scripts: ["jquery.js", "updateclasses.js", "modal.js", "status.js"],
+				pupils:docs
+			});
+	});
+}

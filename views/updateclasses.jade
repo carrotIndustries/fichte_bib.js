@@ -1,0 +1,25 @@
+.top(style="background-image:url(/gfx/reload-large-alpha.png); background-size:80px;")
+	include nav
+	h1 Klassen aktualisieren
+	span.button#submit
+		img(src="/gfx/floppy.png")
+		|Übernehmen
+	span.button#reset
+		img(src="/gfx/backspace.png")
+		|Zurücksetzen
+form(action="javascript:;", style=" margin-top: 7.5em;")
+	table.list(style="width:500px;")
+		thead
+			tr
+				td(style="width:300px;") Name
+				td(style="width:100px;") Alte Klasse
+				td(style="width:100px;") Neue Klasse
+		tbody
+			for pupil in pupils
+				tr
+					td=pupil.lastname+", "+pupil.firstname
+					td=pupil.class
+					td(style="padding-top:3px;, padding-bottom:3px;")
+						input(size=4, value=isNaN(pupil.class.slice(0, -1))?(pupil.class):(parseInt(pupil.class.slice(0, -1))+1)+pupil.class.slice(-1), style=isNaN(pupil.class.slice(0, -1))?"background-color:#FF8383;":"", name=pupil._id)
+	.status
+

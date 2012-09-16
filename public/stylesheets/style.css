@@ -98,7 +98,7 @@ input:focus,textarea:focus,select:focus {
 }
 
 .button:active {
-	background-image: linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
 	background-image: -webkit-linear-gradient(bottom, rgb(100,100,100) 10%, rgb(200,200,200) 80%);
 }
 
